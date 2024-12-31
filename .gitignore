@@ -4,5 +4,4 @@ __pycache__/
 # Ignore Jupyter Notebook checkpoints
 *.ipynb_checkpoints/
 
-# ignore generated data
-data/
+tmp_trainer/

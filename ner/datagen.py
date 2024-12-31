@@ -10,9 +10,9 @@ differnet types:
 - URLs
 """
 
-from os import read
 import random
 import json
+from urllib.parse import urlparse
 import dask.dataframe as dd
 
 COMPANY_NAMES = DOMAIN_NAMES = EMAIL_ADDRESSES = IPV4_ADDRESSES = IPV6_ADDRESSES = URLS = None
@@ -100,41 +100,57 @@ def generate_ner_dataset(output_file):
         for entity_type, data_frame, templates in entity_types:
             # Process the data in chunks to avoid loading entire DataFrame into memory
             for partition in data_frame.to_delayed():
-                partition_df = partition.compute()
-                values = partition_df.iloc[:, 0].tolist()  # Extract the single column as a list
+                try:
+                    partition_df = partition.compute()
+                    values = partition_df.iloc[:, 0].dropna().tolist()  # Filter out null values
 
-                # Generate samples for all items in the raw data
-                for entity in values:
-                    template = random.choice(templates)  # Select a random template
+                    # Generate samples for all items in the raw data
+                    for entity in values:
+                        try:
+                            template = random.choice(templates)  # Select a random template
+                            sentence = template.format(**{entity_type: entity})
+                            start_idx = sentence.find(entity)
+                            end_idx = start_idx + len(entity)
 
-                    # Format the template with the entity
-                    try:
-                        sentence = template.format(**{entity_type: entity})
-                    except KeyError as e:
-                        print(f"Error: {e} Could not format template with entity: {entity}")
-                        print(f"Template: {template}")
-                        continue
+                            # Create the sample with full entity annotation
+                            entities = [
+                                {
+                                    "start": start_idx,
+                                    "end": end_idx,
+                                    "label": entity_type.upper()
+                                }
+                            ]
 
-                    # Find the entity's position in the sentence
-                    start_idx = sentence.find(entity)
-                    end_idx = start_idx + len(entity)
+                            # Additional entity for domain name if email or url
+                            if entity_type in ["email", "url"]:
+                                if entity_type == "email":
+                                    domain_start = entity.find("@") + 1
+                                    domain = entity[domain_start:]
+                                else:  # URL
+                                    parsed_url = urlparse(entity)
+                                    domain = parsed_url.netloc
 
-                    # Create the sample
-                    sample = {
-                        "text": sentence,
-                        "entities": [
-                            {
-                                "start": start_idx,
-                                "end": end_idx,
-                                "label": entity_type.upper()
+                                domain_idx = sentence.find(domain)
+                                if domain_idx != -1:
+                                    entities.append({
+                                        "start": domain_idx,
+                                        "end": domain_idx + len(domain),
+                                        "label": "DOMAIN"
+                                    })
+
+                            sample = {
+                                "text": sentence,
+                                "entities": entities
                             }
-                        ]
-                    }
 
-                    # Write the sample to the file
-                    if not first_item:
-                        f.write(",\n")  # Add a comma and newline before the next item
-                    json.dump(sample, f, indent=2)
-                    first_item = False
+                            # Write the sample to the file
+                            if not first_item:
+                                f.write(",\n")  # Add a comma and newline before the next item
+                            json.dump(sample, f, indent=2)
+                            first_item = False
+                        except Exception as e:
+                            print(f"Error processing entity '{entity}': {e}")
+                except Exception as e:
+                    print(f"Error processing partition: {e}")
 
         f.write("]")  # End of the JSON array

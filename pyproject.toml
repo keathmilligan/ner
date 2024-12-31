@@ -6,15 +6,20 @@ authors = ["Keath Milligan <keath.milligan@inquest.net>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.13"
+optimum = {extras = ["exporters"], version = "^1.23.3"}
+python = "^3.12"
+torch = "^2.5.1"
+transformers = "^4.46"
+datasets = "^3.2.0"
 pandas = "^2.2.3"
 numpy = "^2.2.1"
-ipykernel = "^6.29.5"
-dask = {extras = ["dataframe"], version = "^2024.12.1"}
-dask-expr = "^1.1.21"
 faker = "^33.1.0"
-jinja2 = "^3.1.5"
-
+ipykernel = "^6.29.5"
+tqdm = "^4.67.1"
+ipywidgets = "^8.1.5"
+accelerate = "^1.2.1"
+dask = {extras = ["expr"], version = "^2024.12.1"}
+scikit-learn = "^1.6.0"
 
 [build-system]
 requires = ["poetry-core"]
