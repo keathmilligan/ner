@@ -66,10 +66,10 @@ def read_template_strings():
 
 def generate_ner_dataset(output_file):
     """
-    Generate a JSON dataset for NER training.
+    Generate a JSONL dataset for NER training.
 
     Args:
-        output_file (str): Path to the output JSON file.
+        output_file (str): Path to the output JSONL file.
     """
     global COMPANY_NAMES, DOMAIN_NAMES, EMAIL_ADDRESSES, IPV4_ADDRESSES, IPV6_ADDRESSES, URLS
     global COMPANY_TEMPLATES, DOMAIN_TEMPLATES, EMAIL_TEMPLATES, IP_TEMPLATES, URL_TEMPLATES, \
@@ -94,9 +94,6 @@ def generate_ner_dataset(output_file):
     ]
 
     with open(output_file, "w") as f:
-        f.write("[")  # Start of the JSON array
-        first_item = True
-
         for entity_type, data_frame, templates in entity_types:
             # Process the data in chunks to avoid loading entire DataFrame into memory
             for partition in data_frame.to_delayed():
@@ -104,53 +101,46 @@ def generate_ner_dataset(output_file):
                     partition_df = partition.compute()
                     values = partition_df.iloc[:, 0].dropna().tolist()  # Filter out null values
 
-                    # Generate samples for all items in the raw data
+                    # Generate multiple samples for all items in the raw data
                     for entity in values:
-                        try:
-                            template = random.choice(templates)  # Select a random template
-                            sentence = template.format(**{entity_type: entity})
-                            start_idx = sentence.find(entity)
-                            end_idx = start_idx + len(entity)
+                        for template in ["{" + entity_type + "}", *random.sample(templates, k=10)]:
+                            try:
+                                sentence = template.format(**{entity_type: entity})
+                                start_idx = sentence.find(entity)
+                                end_idx = start_idx + len(entity)
 
-                            # Create the sample with full entity annotation
-                            entities = [
-                                {
-                                    "start": start_idx,
-                                    "end": end_idx,
-                                    "label": entity_type.upper()
+                                # Create the sample with full entity annotation
+                                entities = [
+                                    {
+                                        "start": start_idx,
+                                        "end": end_idx,
+                                        "label": entity_type.upper()
+                                    }
+                                ]
+
+                                # # Additional entity for domain name if email or url
+                                # if entity_type in ["email", "url"]:
+                                #     if entity_type == "email":
+                                #         domain_start = entity.find("@") + 1
+                                #         domain = entity[domain_start:]
+                                #     else:  # URL
+                                #         parsed_url = urlparse(entity)
+                                #         domain = parsed_url.netloc
+
+                                #     domain_idx = sentence.find(domain)
+                                #     if domain_idx != -1:
+                                #         entities.append({
+                                #             "start": domain_idx,
+                                #             "end": domain_idx + len(domain),
+                                #             "label": "DOMAIN"
+                                #         })
+
+                                sample = {
+                                    "text": sentence,
+                                    "entities": entities
                                 }
-                            ]
-
-                            # Additional entity for domain name if email or url
-                            if entity_type in ["email", "url"]:
-                                if entity_type == "email":
-                                    domain_start = entity.find("@") + 1
-                                    domain = entity[domain_start:]
-                                else:  # URL
-                                    parsed_url = urlparse(entity)
-                                    domain = parsed_url.netloc
-
-                                domain_idx = sentence.find(domain)
-                                if domain_idx != -1:
-                                    entities.append({
-                                        "start": domain_idx,
-                                        "end": domain_idx + len(domain),
-                                        "label": "DOMAIN"
-                                    })
-
-                            sample = {
-                                "text": sentence,
-                                "entities": entities
-                            }
-
-                            # Write the sample to the file
-                            if not first_item:
-                                f.write(",\n")  # Add a comma and newline before the next item
-                            json.dump(sample, f, indent=2)
-                            first_item = False
-                        except Exception as e:
-                            print(f"Error processing entity '{entity}': {e}")
+                                f.write(json.dumps(sample) + "\n")
+                            except Exception as e:
+                                print(f"Error processing entity '{entity}': {e}")
                 except Exception as e:
                     print(f"Error processing partition: {e}")
-
-        f.write("]")  # End of the JSON array

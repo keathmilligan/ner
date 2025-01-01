@@ -1,0 +1,62 @@
+Processing chunk 1/6...
+Processing chunk 2/6...
+Processing chunk 3/6...
+Processing chunk 4/6...
+Processing chunk 5/6...
+Processing chunk 6/6...
+{'entity_group': 'COMPANY', 'score': np.float32(0.9177847), 'word': ' Zenith Solutions', 'start': 307, 'end': 323}
+{'entity_group': 'COMPANY', 'score': np.float32(0.75225896), 'word': ' NovaSphere Industries', 'start': 325, 'end': 346}
+{'entity_group': 'COMPANY', 'score': np.float32(0.7816794), 'word': ' Bluebridge Analytics', 'start': 352, 'end': 372}
+{'entity_group': 'COMPANY', 'score': np.float32(0.96439725), 'word': ' Vertex Tech Labs', 'start': 400, 'end': 416}
+{'entity_group': 'COMPANY', 'score': np.float32(0.9970113), 'word': ' AstraCore Innovations', 'start': 421, 'end': 442}
+{'entity_group': 'COMPANY', 'score': np.float32(0.99282616), 'word': ' Zenith Solutions', 'start': 748, 'end': 764}
+{'entity_group': 'COMPANY', 'score': np.float32(0.83525735), 'word': ' NovaSphere Industries', 'start': 858, 'end': 879}
+{'entity_group': 'COMPANY', 'score': np.float32(0.77063876), 'word': ' Vertex Tech Labs', 'start': 1001, 'end': 1017}
+{'entity_group': 'COMPANY', 'score': np.float32(0.9991107), 'word': ' NovaSphere Industries', 'start': 76, 'end': 97}
+{'entity_group': 'COMPANY', 'score': np.float32(0.98718894), 'word': ' Vertex Tech Labs', 'start': 219, 'end': 235}
+{'entity_group': 'COMPANY', 'score': np.float32(0.95539814), 'word': ' Bluebridge Analytics', 'start': 507, 'end': 527}
+{'entity_group': 'COMPANY', 'score': np.float32(0.99046105), 'word': '\nZenith Solutions', 'start': 225, 'end': 242}
+{'entity_group': 'COMPANY', 'score': np.float32(0.99856097), 'word': 'NovaSphere Industries', 'start': 353, 'end': 374}
+{'entity_group': 'COMPANY', 'score': np.float32(0.9936533), 'word': 'Bluebridge Analytics', 'start': 481, 'end': 501}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.998285), 'word': 'www.marketpulse', 'start': 291, 'end': 306}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.99951637), 'word': 'com', 'start': 307, 'end': 310}
+{'entity_group': 'URL', 'score': np.float32(0.91989994), 'word': ' https://', 'start': 362, 'end': 370}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.92794627), 'word': 'reports.novasphere', 'start': 370, 'end': 388}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.9996393), 'word': 'com', 'start': 389, 'end': 392}
+{'entity_group': 'URL', 'score': np.float32(0.8275694), 'word': '/q', 'start': 392, 'end': 394}
+{'entity_group': 'URL', 'score': np.float32(0.96049535), 'word': '-', 'start': 395, 'end': 396}
+{'entity_group': 'IP_ADDR', 'score': np.float32(0.99919605), 'word': ' 203.0.113.42', 'start': 609, 'end': 621}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.9997466), 'word': 'zenithsolutions.com', 'start': 716, 'end': 735}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.99980253), 'word': 'zenithsolutions', 'start': 82, 'end': 97}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.99975187), 'word': 'com', 'start': 98, 'end': 101}
+{'entity_group': 'IP_ADDR', 'score': np.float32(0.99988335), 'word': ' 2001:0db8:85a3:0000:0000:8a2e:0370:7334', 'start': 351, 'end': 390}
+{'entity_group': 'EMAIL', 'score': np.float32(0.9991089), 'word': ' rmcadams@', 'start': 537, 'end': 546}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.99977297), 'word': 'zenithsolutions', 'start': 546, 'end': 561}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.99964666), 'word': 'com', 'start': 562, 'end': 565}
+{'entity_group': 'EMAIL', 'score': np.float32(0.99916965), 'word': ' jcarter@', 'start': 600, 'end': 608}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.9998155), 'word': 'bluebridgeanalytics', 'start': 608, 'end': 627}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.99976546), 'word': 'com', 'start': 628, 'end': 631}
+{'entity_group': 'COMPANY', 'score': np.float32(0.6146859), 'word': 'raCore Innovations', 'start': 677, 'end': 695}
+{'entity_group': 'URL', 'score': np.float32(0.85989577), 'word': '://', 'start': 702, 'end': 705}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.9969332), 'word': 'astracore', 'start': 705, 'end': 714}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.99926025), 'word': 'com', 'start': 715, 'end': 718}
+{'entity_group': 'URL', 'score': np.float32(0.64872086), 'word': '/', 'start': 718, 'end': 719}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.99340314), 'word': ' securehosting.net', 'start': 756, 'end': 773}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.9999046), 'word': 'bluebridgeanalytics.com', 'start': 0, 'end': 23}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.55612636), 'word': ' Astra', 'start': 66, 'end': 71}
+{'entity_group': 'COMPANY', 'score': np.float32(0.5471648), 'word': 'Core', 'start': 71, 'end': 75}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.43764657), 'word': ' Innov', 'start': 76, 'end': 81}
+{'entity_group': 'URL', 'score': np.float32(0.9452664), 'word': ' https://', 'start': 89, 'end': 97}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.99920696), 'word': 'astracore', 'start': 97, 'end': 106}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.999589), 'word': 'com', 'start': 107, 'end': 110}
+{'entity_group': 'URL', 'score': np.float32(0.8312367), 'word': '/resources', 'start': 110, 'end': 120}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.9985917), 'word': ' securehosting.net', 'start': 148, 'end': 165}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.9983634), 'word': ' globaltrade.org', 'start': 190, 'end': 205}
+{'entity_group': 'COMPANY', 'score': np.float32(0.9151559), 'word': ' NovaSphere Industries', 'start': 243, 'end': 264}
+{'entity_group': 'COMPANY', 'score': np.float32(0.93324655), 'word': ' Zenith Solutions', 'start': 266, 'end': 282}
+{'entity_group': 'COMPANY', 'score': np.float32(0.8646218), 'word': ' Vertex Tech Labs', 'start': 284, 'end': 300}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.99915063), 'word': ' datainsights.global', 'start': 323, 'end': 342}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.9996834), 'word': ' techmonitor.co', 'start': 344, 'end': 358}
+{'entity_group': 'EMAIL', 'score': np.float32(0.99952006), 'word': ' clara.jensen@', 'start': 471, 'end': 484}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.99989015), 'word': 'strategicvision', 'start': 484, 'end': 499}
+{'entity_group': 'DOMAIN', 'score': np.float32(0.99986565), 'word': 'com', 'start': 500, 'end': 503}
