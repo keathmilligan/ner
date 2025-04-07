@@ -1,6 +1,10 @@
 # Project Overview
 
-The `ner` project is a collection of tools and models for Named Entity Recognition (NER). It includes Jupyter notebooks for data generation, model training, and inference, as well as Python scripts for various NER-related tasks.
+Prepare data and train a Named Entity Recognition (NER) model to identify key information items in a text document including company names,
+domain names, URLs, IP addresses and email addresses. It includes Jupyter notebooks for data generation,
+model training, and inference, as well as Python scripts for various NER-related tasks.
+
+Model is exported for use with the ONNX runtime.
 
 ## Getting Started
 
@@ -39,7 +43,18 @@ The `ner` project is a collection of tools and models for Named Entity Recogniti
 ## Usage
 
 ### Data Generation
+
+Combines raw data from Kaggle or sources or generated fake data with collections of contextual English sentences
+and log messages to produce a NER-ready annotated dataset.
+
 Run the `data.ipynb` Jupyter notebook to generate data for training.
 
+Adjust the count parameters as needed.
+
+The model with current parameters takes about 1.5hrs to train on a Macbook Pro M2 Max.
+
 ### Model Training
-Run the `model.ipynb` Jupyter notebook to train and test the NER model.
+
+Run the `model.ipynb` Jupyter notebook to tokenize the dataset, train and test the NER model.
+
+The model exported to ONNX format.
